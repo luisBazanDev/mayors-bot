@@ -14,6 +14,8 @@ const client = new Client({
 Handlers.dc.events(__dirname + "/Events", client);
 Handlers.dc.commands(__dirname + "/Commands", client);
 
+client.format = require("./Formatter.js");
+
 client.login(process.env.BOT_TOKEN);
 
 module.exports = client;
