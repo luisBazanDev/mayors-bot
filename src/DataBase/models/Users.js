@@ -12,6 +12,10 @@ const Users = new Schema({
     type: Array,
     default: [],
   },
+  permissions: {
+    type: Number,
+    default: 0,
+  },
 });
 
 Users.static.getAge = (birth_date) => {
