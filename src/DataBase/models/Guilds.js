@@ -17,12 +17,13 @@ Model.resolveGuild = async (guild_id) => {
   if (fetchData) {
     fetchData.display_name = guild.name;
     await fetchData.save();
-    return;
+    return fetchData;
   }
   const guildData = new Model({
     guild_id,
   });
   await guildData.save();
+  return guildData;
 };
 
 module.exports = Model;
