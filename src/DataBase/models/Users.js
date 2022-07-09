@@ -37,4 +37,23 @@ Users.static.getSocials = (social_networks) => {
   });
 };
 
-module.exports = model("Users", Users);
+const Model = model("Users", Users);
+
+Model.resolveUser = async (user) => {
+  const fetchData = await Model.findOne({
+    user_id: user.id,
+  });
+
+  if (fetchData) return fetchData;
+  const userData = new Model({
+    user_id: user.id,
+    user_name: user.username,
+    display_avatar_url: user.displayAvatarURL({
+      size: 600,
+    }),
+  });
+  await userData.save();
+  return userData;
+};
+
+module.exports = Model;
