@@ -14,11 +14,7 @@ Model.resolveGuild = async (guild_id) => {
   const fetchData = await Model.findOne({
     guild_id,
   });
-  if (fetchData) {
-    fetchData.display_name = guild.name;
-    await fetchData.save();
-    return fetchData;
-  }
+  if (fetchData) return fetchData;
   const guildData = new Model({
     guild_id,
   });
