@@ -6,19 +6,18 @@ module.exports = {
   name: "interactionCreate",
   execute: async (interaction, client) => {
     if (!interaction.isCommand()) return;
+    const userData = await Users.findOne({
+      user_id: interaction.user.id,
+    });
+    if (userData === null) return;
+    const guildData = await Guilds.findOne({
+      guild_id: interaction.guild.id,
+    });
+    if (guildData === null) return;
     client.slashcmds.forEach(async (search, index) => {
       if (interaction.commandName === search.name) {
-        const guildData = await Guilds.findOne({
-          guild_id: interaction.guild.id,
-        });
-        if (guildData === null) return;
         interaction.lang = require(`../../../resources/langs/${guildData.lang}.json`);
-
-        const data = await Users.findOne({
-          user_id: interaction.user.id,
-        });
-        if (data === null) return;
-        if (client.slashcmds[index].permLevel > data.permissions) {
+        if (client.slashcmds[index].permLevel > userData.permissions) {
           interaction.reply({
             embeds: [
               client.format.errorEmbed(
