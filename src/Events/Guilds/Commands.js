@@ -6,13 +6,9 @@ module.exports = {
   name: "interactionCreate",
   execute: async (interaction, client) => {
     if (!interaction.isCommand()) return;
-    const userData = await Users.findOne({
-      user_id: interaction.user.id,
-    });
+    var userData = await Users.resolveUser(interaction.user);
     if (userData === null) return;
-    const guildData = await Guilds.findOne({
-      guild_id: interaction.guild.id,
-    });
+    var guildData = await Guilds.resolveGuild(interaction.guild.id);
     if (guildData === null) return;
     client.slashcmds.forEach(async (search, index) => {
       if (interaction.commandName === search.name) {
