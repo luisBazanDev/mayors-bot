@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 
 const Guilds = new Schema({
-  guild_id: Number,
+  guild_id: String,
   display_name: String,
   lang: {
     type: String,
