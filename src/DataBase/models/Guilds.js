@@ -7,6 +7,10 @@ const Guilds = new Schema({
     type: String,
     default: "EN",
   },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Model = model("Guilds", Guilds);
