@@ -7,7 +7,7 @@ const Candidates = new Schema({
     type: Array,
     default: [],
   },
-  votos: {
+  votes: {
     type: Number,
     default: 0,
   },
